@@ -29,7 +29,11 @@
               </h4>
             </div>
             <div class="col-md-3">
+              <%= link_to "Show", service_path(service), class: "btn btn-default pull-right" %>
+
               <%= link_to "Update", edit_service_path(service), class: "btn btn-default pull-right" %>
+
+              <%= link_to "Delete", service_path(service), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: "btn btn-default pull-right" %>
             </div>
           </div>
           <hr>

@@ -28,7 +28,25 @@
     Newest Gigs
   </h1>
   <div class="row">
-    <div class="col-md-3">
+  <% @services.each do |service| %>
+      <div class="col-md-3">
+        <div class="gig-card">
+          <% if service.image.present? %>
+            <%= image_tag service.image ,:class=>"img"%>
+          <% else %>
+            <%= image_tag 'lyrics.jpg'%>
+          <% end %>
+          <h4>
+            <%= service.title %>
+            <!-- I will write a song for your lyrics -->
+          </h4>
+          <h3>
+            Rs. <%= service.price %>
+          </h3>
+        </div>
+      </div>
+    <% end %>
+<!--     <div class="col-md-3">
       <div class="gig-card">
         <%= image_tag 'blog.jpg'%>
         <h4>
@@ -71,6 +89,6 @@
           Rs. 500
         </h3>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
