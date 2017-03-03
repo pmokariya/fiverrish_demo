@@ -1,4 +1,4 @@
-<div class="hero">
+<!-- <div class="hero">
   <div class="container">
     <div class="row">
       <div class="hero-heading">
@@ -22,7 +22,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <div class="container section">
   <h1>
     Newest Gigs
@@ -32,7 +32,7 @@
       <div class="col-md-3">
         <div class="gig-card">
           <% if service.image.present? %>
-            <%= image_tag service.image ,:class=>"img"%>
+            <%= image_tag service.image ,:class=>"gig-img"%>
           <% else %>
             <%= image_tag 'lyrics.jpg'%>
           <% end %>
