@@ -8,32 +8,34 @@
 </head>
 <body>
   <%= render 'shared/navbar' %>
-  	<div class="hero">
-  <div class="container">
-    <div class="row">
-      <div class="hero-heading">
-        What do you need done?<br/>
-        Find it on Fiverrish.
-        <p>Browse. Buy. Done</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-offset-3 col-md-6">
-        <form action="">
-          <div class="input-group input-group-lg">
-            <input type="text" class="form-control" placeholder="What are you looking for...">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">
-                Find Services
-              </button>
-            </span>
+	<% if params[:controller] == "pages" && params[:action]=="home"%>
+    <div class="hero">
+      <div class="container">
+        <div class="row">
+          <div class="hero-heading">
+            What do you need done?<br/>
+            Find it on Fiverrish.
+            <p>Browse. Buy. Done</p>
           </div>
-        </form>
+        </div>
+        <div class="row">
+          <div class="col-md-offset-3 col-md-6">
+            <form action="">
+              <div class="input-group input-group-lg">
+                <input type="text" class="form-control" placeholder="What are you looking for...">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">
+                    Find Services
+                  </button>
+                </span>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-	<div class="container">
+  <% end %>
+  <div class="container">
   		<div class="row">
 	    	<%= yield %>
 		</div>
