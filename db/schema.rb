@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170212140330) do
+ActiveRecord::Schema.define(version: 20170306120631) do
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20170212140330) do
     t.integer  "total_price"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "currency"
   end
 
   add_index "orders", ["service_id"], name: "index_orders_on_service_id"

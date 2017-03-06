@@ -1,10 +1,15 @@
+<script src="https://checkout.stripe.com/checkout.js"></script>
 <div class="panel panel-default">
   <div class="panel-body">
-    <%= form_for ([@service, @service.orders.new]) do |f| %>
+    <%= form_for ([@service, @service.orders.new]),html: {id: 'stripeForm'} do |f| %>
       <%= f.hidden_field :service_id, value: @service.id %>
       <%= f.hidden_field :price, value: @service.price %>
+      <%= hidden_field_tag 'stripeToken' %>
+      <%= hidden_field_tag 'stripeEmail' %>
+      <%= hidden_field_tag 'stripeAmount' %>
       <center>
-        <%= f.submit "Order Now (Rs. #{@service.price})", class: "btn btn-primary btn-lg btn-order" %>
+        <%#= f.submit "Order Now (Rs. #{@service.price})", class: "btn btn-primary btn-lg btn-order" %>
+        <button id="stripe-button" class="btn btn-primary btn-lg btn-order">Order Now (Rs. <%= @service.price %>)</button>
       </center>
       <hr>
       <h5 class="pull-left">
@@ -16,8 +21,8 @@
             ["1 (Rs. #{@service.price*1})", 1],
             ["2 (Rs. #{@service.price*2})", 2],
             ["3 (Rs. #{@service.price*3})", 3],
-            ["4 (Rs. #{@service.price*4})", 1],
-            ["5 (Rs. #{@service.price*5})", 1] ], {id: "quantity"} ) ) %>
+            ["4 (Rs. #{@service.price*4})", 4],
+            ["5 (Rs. #{@service.price*5})", 5] ], {id: "quantity"} ) ) %>
         </div>
       </div>
     <% end %>
@@ -26,8 +31,31 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-     $("select").bind("change",function() {
-       $('.btn-order').html('Order Now - ' + $("select option:selected").html());
-     });
- })
+    $("select").bind("change",function() {
+      $('.btn-order').html('Order Now - ' + $("select option:selected").html());
+    });
+  })
+  var handler = StripeCheckout.configure({
+    key: "<%= Rails.application.secrets.stripe_publishable_key %>",
+    token: function (token, args) {
+      $("#stripeToken").val(token.id);
+      $("#stripeEmail").val(token.email);
+      var price = '<%= @service.price %>';
+      var quantity = $('#order_quantity').val();
+      $("#stripeAmount").val(price*quantity);
+      $("#stripeForm").submit();
+    }
+  });
+  $('#stripe-button').on('click', function (e) {
+    // Open Checkout with further options
+    handler.open({
+     name: 'Your customer name',
+     description: 'Your description goes here',
+     amount: <%= @service.price %>
+  });
+  e.preventDefault();
+  });
+  $(window).on('popstate', function() {
+    handler.close();
+  });
 </script>

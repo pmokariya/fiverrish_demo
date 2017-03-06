@@ -59,3 +59,6 @@ group :production do
   # ImageMagick
   gem 'rmagick'
 end
+
+gem 'stripe'
+
