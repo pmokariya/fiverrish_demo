@@ -14144,3 +14144,22 @@ Processing by PagesController#home as HTML
   Rendered pages/home.html.erb within layouts/application (15.8ms)
   Rendered shared/_navbar.html.erb (1.2ms)
 Completed 200 OK in 86ms (Views: 77.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-03-06 15:48:20 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PagesController#home as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36mService Load (0.3ms)[0m  [1mSELECT  "services".* FROM "services" WHERE "services"."user_id" = ?  ORDER BY "services"."created_at" DESC LIMIT 4[0m  [["user_id", 2]]
+  Rendered pages/home.html.erb within layouts/application (4545.0ms)
+  Rendered shared/_navbar.html.erb (3.1ms)
+Completed 200 OK in 4718ms (Views: 4673.2ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-03-06 15:50:41 +0530
+Processing by PagesController#home as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 2]]
+  [1m[36mService Load (0.3ms)[0m  [1mSELECT  "services".* FROM "services" WHERE "services"."user_id" = ?  ORDER BY "services"."created_at" DESC LIMIT 4[0m  [["user_id", 2]]
+  Rendered pages/home.html.erb within layouts/application (17.9ms)
+  Rendered shared/_navbar.html.erb (0.8ms)
+Completed 200 OK in 81ms (Views: 58.2ms | ActiveRecord: 1.4ms)

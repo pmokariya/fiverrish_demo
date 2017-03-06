@@ -1,8 +1,15 @@
 class ServicesController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :set_service, only: [:show, :edit, :update]
+
   def index
-    @services = current_user.services if current_user.services.present?
+    if params[:key] == "all"
+      @services = Service.all
+    elsif params[:key] == "my"
+      @services = current_user.services if current_user.services.present?
+    else
+      @services = current_user.services if current_user.services.present?
+    end
   end
 
   def show
